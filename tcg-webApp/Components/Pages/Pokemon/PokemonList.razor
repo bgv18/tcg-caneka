@@ -1,0 +1,67 @@
+﻿@page "/pokemon-list"
+@inject HttpClient Http
+@using tcg_webApp.Domain
+
+<MudContainer>
+    <MudGrid>
+        @if (pokemons == null)
+        {
+            <!-- Exibe o Skeleton enquanto os dados estão carregando -->
+            @for (int i = 0; i < 8; i++)
+            {
+                <MudItem xs="12" sm="6" md="4" lg="3">
+                    <MudCard>
+                        <MudCardHeader>
+                            <CardHeaderAvatar>
+                                <MudSkeleton variant="circle" width="40px" height="40px" />
+                            </CardHeaderAvatar>
+                            <CardHeaderContent>
+                                <MudSkeleton width="60%" height="20px" />
+                                <MudSkeleton width="40%" height="16px" />
+                            </CardHeaderContent>
+                        </MudCardHeader>
+                        <MudCardMedia>
+                            <MudSkeleton height="250px" />
+                        </MudCardMedia>
+                        <MudCardContent>
+                            <MudSkeleton width="80%" height="16px" />
+                            <MudSkeleton width="60%" height="16px" />
+                            <MudSkeleton width="70%" height="16px" />
+                        </MudCardContent>
+                        <MudCardActions>
+                            <MudSkeleton width="40px" height="40px" variant="circle" />
+                            <MudSkeleton width="40px" height="40px" variant="circle" />
+                        </MudCardActions>
+                    </MudCard>
+                </MudItem>
+            }
+        }
+        else
+        {
+            @foreach (var pokemon in pokemons)
+            {
+                <MudItem xs="12" sm="6" md="4" lg="3">
+                    <PokemonCard Pokemon="pokemon" />
+                </MudItem>
+            }
+        }
+    </MudGrid>
+</MudContainer>
+
+@code {
+    private List<Pokemon> pokemons;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            // Substitua pela URL da sua API
+            var response = await Http.GetFromJsonAsync<List<Pokemon>>("https://localhost:7233/api/Pokemon/list?take=10&skip=1");
+            pokemons = response;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro ao carregar Pokémon: {ex.Message}");
+        }
+    }
+}

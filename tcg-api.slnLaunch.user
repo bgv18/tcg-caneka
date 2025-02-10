@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "tcg-api\\tcg-api.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "tcg-webApp\\tcg-webApp.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
