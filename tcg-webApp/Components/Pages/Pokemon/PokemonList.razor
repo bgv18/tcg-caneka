@@ -4,6 +4,14 @@
 
 <MudContainer>
     <MudGrid>
+        <MudItem xs="12" sm="6" md="4">
+            <MudTextField @bind-Value="parameters.Name" Label="Outlined" Variant="Variant.Outlined"></MudTextField>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <MudIconButton OnClick="@Search" Icon="@Icons.Material.Outlined.Search" Color="Color.Primary" aria-label="pesquisa" />    
+        </MudItem>
+    </MudGrid>
+    <MudGrid>
         @if (pokemons == null)
         {
             <!-- Exibe o Skeleton enquanto os dados estão carregando -->
@@ -51,12 +59,35 @@
 @code {
     private List<Pokemon> pokemons;
 
+    public string TextValue { get; set; }
+
+    public class Filter
+    {
+        public string Name { get; set; }
+    }
+
+    public Filter parameters = new Filter();
+
     protected override async Task OnInitializedAsync()
     {
         try
         {
             // Substitua pela URL da sua API
-            var response = await Http.GetFromJsonAsync<List<Pokemon>>("https://localhost:7233/api/Pokemon/list?take=10&skip=1");
+            var response = await Http.GetFromJsonAsync<List<Pokemon>>("http://localhost:5098/api/Pokemon/list?take=20&skip=1");
+            pokemons = response;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro ao carregar Pokémon: {ex.Message}");
+        }
+    }
+
+    async void Search()
+    {
+        
+        try
+        {
+            var response = await Http.GetFromJsonAsync<List<Pokemon>>($"http://localhost:5098/api/Pokemon/namelist?name={parameters.Name}&take=20&skip=1");
             pokemons = response;
         }
         catch (Exception ex)

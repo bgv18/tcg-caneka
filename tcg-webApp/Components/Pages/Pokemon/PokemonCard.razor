@@ -23,25 +23,25 @@
         <MudTreeView T="string" ReadOnly Dense="true">
             <MudTreeViewItem Text="TCG Player Prices">
                 <MudTreeViewItem Text="Holofoil">
-                    <MudTreeViewItem Value="@("Low:" + Pokemon.TcgPlayer.Prices.Holofoil?.Low?.ToString("C") ?? "N/A")" />
-                    <MudTreeViewItem Text="@("Mid: " + Pokemon.TcgPlayer.Prices.Holofoil?.Mid?.ToString("C") ?? "N/A")" />
-                    <MudTreeViewItem Text="@("High: " + Pokemon.TcgPlayer.Prices.Holofoil?.High?.ToString("C") ?? "N/A")" />
-                    <MudTreeViewItem Text="@("Market: " + Pokemon.TcgPlayer.Prices.Holofoil?.Market?.ToString("C") ?? "N/A")" />
+                    <MudTreeViewItem Value="@("Low:" + Pokemon.TcgPlayer?.Prices?.Holofoil?.Low?.ToString("C") ?? "N/A")" />
+                    <MudTreeViewItem Text="@("Mid: " + Pokemon.TcgPlayer?.Prices?.Holofoil?.Mid?.ToString("C") ?? "N/A")" />
+                    <MudTreeViewItem Text="@("High: " + Pokemon.TcgPlayer?.Prices?.Holofoil?.High?.ToString("C") ?? "N/A")" />
+                    <MudTreeViewItem Text="@("Market: " + Pokemon.TcgPlayer?.Prices?.Holofoil?.Market?.ToString("C") ?? "N/A")" />
                 </MudTreeViewItem>
                 <MudTreeViewItem Text="Reverse Holofoil">
-                    <MudTreeViewItem Text="@("Low: " + Pokemon.TcgPlayer.Prices.ReverseHolofoil?.Low?.ToString("C") ?? "N/A")" />
-                    <MudTreeViewItem Text="@("Mid: " + Pokemon.TcgPlayer.Prices.ReverseHolofoil?.Mid?.ToString("C") ?? "N/A")" />
-                    <MudTreeViewItem Text="@("High: " + Pokemon.TcgPlayer.Prices.ReverseHolofoil?.High?.ToString("C") ?? "N/A")" />
-                    <MudTreeViewItem Text="@("Market: " + Pokemon.TcgPlayer.Prices.ReverseHolofoil?.Market?.ToString("C") ?? "N/A")" />
+                    <MudTreeViewItem Text="@("Low: " + Pokemon.TcgPlayer?.Prices?.ReverseHolofoil?.Low?.ToString("C") ?? "N/A")" />
+                    <MudTreeViewItem Text="@("Mid: " + Pokemon.TcgPlayer?.Prices?.ReverseHolofoil?.Mid?.ToString("C") ?? "N/A")" />
+                    <MudTreeViewItem Text="@("High: " + Pokemon.TcgPlayer?.Prices?.ReverseHolofoil?.High?.ToString("C") ?? "N/A")" />
+                    <MudTreeViewItem Text="@("Market: " + Pokemon.TcgPlayer?.Prices?.ReverseHolofoil?.Market?.ToString("C") ?? "N/A")" />
                 </MudTreeViewItem>
             </MudTreeViewItem>
             <MudTreeViewItem Text="Card Market Prices">
-                <MudTreeViewItem Text="@("Average Sell Price: " + Pokemon.CardMarket.Prices.AverageSellPrice?.ToString("C") ?? "N/A")" />
-                <MudTreeViewItem Text="@("Low Price: " + Pokemon.CardMarket.Prices.LowPrice?.ToString("C") ?? "N/A")" />
-                <MudTreeViewItem Text="@("Trend Price: " + Pokemon.CardMarket.Prices.TrendPrice?.ToString("C") ?? "N/A")" />
-                <MudTreeViewItem Text="@("Reverse Holo Sell: " + Pokemon.CardMarket.Prices.ReverseHoloSell?.ToString("C") ?? "N/A")" />
-                <MudTreeViewItem Text="@("Reverse Holo Low: " + Pokemon.CardMarket.Prices.ReverseHoloLow?.ToString("C") ?? "N/A")" />
-                <MudTreeViewItem Text="@("Reverse Holo Trend: " + Pokemon.CardMarket.Prices.ReverseHoloTrend?.ToString("C") ?? "N/A")" />
+                <MudTreeViewItem Text="@("Average Sell Price: " + Pokemon.CardMarket?.Prices?.AverageSellPrice?.ToString("C") ?? "N/A")" />
+                <MudTreeViewItem Text="@("Low Price: " + Pokemon.CardMarket?.Prices?.LowPrice?.ToString("C") ?? "N/A")" />
+                <MudTreeViewItem Text="@("Trend Price: " + Pokemon.CardMarket?.Prices?.TrendPrice?.ToString("C") ?? "N/A")" />
+                <MudTreeViewItem Text="@("Reverse Holo Sell: " + Pokemon.CardMarket?.Prices?.ReverseHoloSell?.ToString("C") ?? "N/A")" />
+                <MudTreeViewItem Text="@("Reverse Holo Low: " + Pokemon.CardMarket?.Prices?.ReverseHoloLow?.ToString("C") ?? "N/A")" />
+                <MudTreeViewItem Text="@("Reverse Holo Trend: " + Pokemon.CardMarket?.Prices?.ReverseHoloTrend?.ToString("C") ?? "N/A")" />
             </MudTreeViewItem>
         </MudTreeView>
         

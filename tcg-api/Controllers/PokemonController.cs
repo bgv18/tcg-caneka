@@ -27,5 +27,17 @@ namespace tcg_api.Controllers
             var cards = await pokemonIntegration.GetPokemonCardsByFilterPagination();
             return Ok(cards);
         }
+
+        [HttpGet]
+        [Route("namelist")]
+        public async Task<IActionResult> PokemonCardListByName(
+            [FromServices] IPokemonIntegration pokemonIntegration, string name, 
+            int take, int skip)
+
+        {
+            var cards = await pokemonIntegration.GetPokemonCardsByName(name, take, skip);
+         
+            return cards.Count == 0 ? BadRequest() : Ok(cards);
+        }
     }
 }

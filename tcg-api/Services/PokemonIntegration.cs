@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Options;
+using PokemonTcgSdk.Standard.Features.FilterBuilder.Pokemon;
 using PokemonTcgSdk.Standard.Infrastructure.HttpClients;
 using PokemonTcgSdk.Standard.Infrastructure.HttpClients.Cards;
 using tcg_api.Interfaces;
@@ -23,6 +24,15 @@ namespace tcg_api.Services
         public async Task<List<PokemonCard>> GetPokemonCardsByPagination(int take, int skip)
         {
             var apiResourceList = await _pokeClient.GetApiResourceAsync<PokemonCard>(take, skip);
+            var cards = apiResourceList.Results;
+
+            return cards;
+        }
+
+        public async Task<List<PokemonCard>> GetPokemonCardsByName(string name, int take, int skip)
+        {
+            var filter = PokemonFilterBuilder.CreatePokemonFilter().AddName(name);
+            var apiResourceList = await _pokeClient.GetApiResourceAsync<PokemonCard>(take, skip, filter);
             var cards = apiResourceList.Results;
 
             return cards;

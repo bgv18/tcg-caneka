@@ -7,5 +7,7 @@ namespace tcg_api.Interfaces
     {
         public Task<List<PokemonCard>> GetPokemonCardsByPagination(int take, int skip);
         public Task<List<PokemonCard>> GetPokemonCardsByFilterPagination();
+        public Task<List<PokemonCard>> GetPokemonCardsByName(string name, int take, int skip);
+
     }
 }

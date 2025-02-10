@@ -10,7 +10,7 @@
         public int Hp { get; set; }
         public List<string> Types { get; set; } = new List<string>();
         public string EvolvesFrom { get; set; }
-        public object AncientTrait { get; set; } // Pode ser nulo ou ter uma estrutura específica
+        //public object AncientTrait { get; set; } // Pode ser nulo ou ter uma estrutura específica
         public List<Ability> Abilities { get; set; } = new List<Ability>();
         public List<Attack> Attacks { get; set; } = new List<Attack>();
         public List<Weakness> Weaknesses { get; set; } = new List<Weakness>();
