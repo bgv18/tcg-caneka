@@ -5,21 +5,35 @@
     public Pokemon Pokemon { get; set; }
 }
 
-<MudCard>
+<MudCard Outlined="true">
     <MudCardHeader>
         <CardHeaderAvatar>
-            <MudAvatar Color="Color.Secondary">@Pokemon.Name[0]</MudAvatar>
+            <!-- Avatar ou ícone opcional -->
         </CardHeaderAvatar>
         <CardHeaderContent>
-            <MudText Typo="Typo.body1">@Pokemon.Name</MudText>
-            <MudText Typo="Typo.body2">@Pokemon.Id</MudText>
+            <!-- Nome do Pokémon -->
+            <MudText Typo="Typo.h4"
+                     Style="font-weight: bold; color: rgba(119, 107, 231, 1); text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">
+                @Pokemon.Name
+            </MudText>
+            <!-- ID do Pokémon -->
+            <MudText Typo="Typo.body2"
+                     Style="font-weight: bold; color: #2a75bb; margin-top: 5px;">
+                #@Pokemon.Id
+            </MudText>
         </CardHeaderContent>
     </MudCardHeader>
-    <MudCardMedia  Image="@Pokemon.Images.Small" Height="450" />
+    <MudCardMedia Image="@Pokemon.Images.Small" Height="450" />
     <MudCardContent>
-        <MudText Typo="Typo.body2">Types: @string.Join(", ", Pokemon.Types)</MudText>
-        
-        <MudText Typo="Typo.h6">Prices</MudText>
+        <!-- Tipos do Pokémon -->
+        <MudText Typo="Typo.body2" Style="font-weight: bold; color: #333;">
+            Types: @string.Join(", ", Pokemon.Types)
+        </MudText>
+
+        <!-- Preços do Pokémon -->
+        <MudText Typo="Typo.h6" Style="font-weight: bold; color: #2a75bb; margin-top: 15px;">
+            Prices
+        </MudText>
         <MudTreeView T="string" ReadOnly Dense="true">
             <MudTreeViewItem Text="TCG Player Prices">
                 <MudTreeViewItem Text="Holofoil">
@@ -44,6 +58,5 @@
                 <MudTreeViewItem Text="@("Reverse Holo Trend: " + Pokemon.CardMarket?.Prices?.ReverseHoloTrend?.ToString("C") ?? "N/A")" />
             </MudTreeViewItem>
         </MudTreeView>
-        
     </MudCardContent>
 </MudCard>

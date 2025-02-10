@@ -3,14 +3,29 @@
 @using tcg_webApp.Domain
 
 <MudContainer>
-    <MudGrid>
-        <MudItem xs="12" sm="6" md="4">
-            <MudTextField @bind-Value="parameters.Name" Label="Outlined" Variant="Variant.Outlined"></MudTextField>
-        </MudItem>
-        <MudItem xs="12" sm="6" md="4">
-            <MudIconButton OnClick="@Search" Icon="@Icons.Material.Outlined.Search" Color="Color.Primary" aria-label="pesquisa" />    
-        </MudItem>
-    </MudGrid>
+    <MudCard Style="margin-top: 20px; margin-bottom: 20px;" Outlined="true">
+        <MudCardContent>
+            <MudGrid>
+                <!-- Campo de texto -->
+                <MudItem xs="12" sm="10" md="8" lg="9">
+                    <MudTextField @bind-Value="parameters.Name"
+                                  Label="Nome da carta"
+                                  Variant="Variant.Outlined"
+                                  FullWidth="true">
+                    </MudTextField>
+                </MudItem>
+
+                <!-- Botão de pesquisa -->
+                <MudItem xs="12" sm="2" md="4" lg="3" Style="display: flex; justify-content: flex-end; align-items: center;">
+                    <MudIconButton OnClick="@Search"
+                                   Icon="@Icons.Material.Outlined.Search"
+                                   Color="Color.Primary"
+                                   aria-label="pesquisa">
+                    </MudIconButton>
+                </MudItem>
+            </MudGrid>
+        </MudCardContent>
+    </MudCard>
     <MudGrid>
         @if (pokemons == null)
         {
@@ -72,7 +87,6 @@
     {
         try
         {
-            // Substitua pela URL da sua API
             var response = await Http.GetFromJsonAsync<List<Pokemon>>("http://localhost:5098/api/Pokemon/list?take=20&skip=1");
             pokemons = response;
         }
@@ -87,7 +101,11 @@
         
         try
         {
-            var response = await Http.GetFromJsonAsync<List<Pokemon>>($"http://localhost:5098/api/Pokemon/namelist?name={parameters.Name}&take=20&skip=1");
+            var response = 
+                await Http.GetFromJsonAsync<List<Pokemon>>(
+                    $"http://localhost:5098/api/Pokemon/namelist?name={parameters.Name}&take=20&skip=1"
+                );
+
             pokemons = response;
         }
         catch (Exception ex)
