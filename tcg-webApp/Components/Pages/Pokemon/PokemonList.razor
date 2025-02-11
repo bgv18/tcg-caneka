@@ -9,18 +9,18 @@
                 <!-- Campo de texto -->
                 <MudItem xs="12" sm="10" md="8" lg="9">
                     <MudTextField @bind-Value="parameters.Name"
-                                  Label="Nome da carta"
-                                  Variant="Variant.Outlined"
-                                  FullWidth="true">
+                    Label="Nome da carta"
+                    Variant="Variant.Outlined"
+                    FullWidth="true">
                     </MudTextField>
                 </MudItem>
 
                 <!-- Botão de pesquisa -->
                 <MudItem xs="12" sm="2" md="4" lg="3" Style="display: flex; justify-content: flex-end; align-items: center;">
                     <MudIconButton OnClick="@Search"
-                                   Icon="@Icons.Material.Outlined.Search"
-                                   Color="Color.Primary"
-                                   aria-label="pesquisa">
+                    Icon="@Icons.Material.Outlined.Search"
+                    Color="Color.Primary"
+                    aria-label="pesquisa">
                     </MudIconButton>
                 </MudItem>
             </MudGrid>
@@ -69,25 +69,34 @@
             }
         }
     </MudGrid>
+    <MudGrid Justify="Justify.Center" AlignItems="AlignItems.Center" Style="margin-top: 20px; margin-bottom: 20px;">
+        <MudItem>
+            <MudPagination SelectedChanged="PageChanged" Color="Color.Primary" Count="5" />
+        </MudItem>
+    </MudGrid>
 </MudContainer>
 
 @code {
+    #region Global Variables
     private List<Pokemon> pokemons;
-
     public string TextValue { get; set; }
+    public Filter parameters = new Filter();
+    private int _selected = 1;
+    #endregion
 
+    #region InternalClasses
     public class Filter
     {
         public string Name { get; set; }
     }
+    #endregion
 
-    public Filter parameters = new Filter();
-
+    #region Methods
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            var response = await Http.GetFromJsonAsync<List<Pokemon>>("http://localhost:5098/api/Pokemon/list?take=20&skip=1");
+            var response = await Http.GetFromJsonAsync<List<Pokemon>>($"http://localhost:5098/api/Pokemon/list?take=20&skip=1");
             pokemons = response;
         }
         catch (Exception ex)
@@ -98,7 +107,7 @@
 
     async void Search()
     {
-        
+
         try
         {
             var response = 
@@ -113,4 +122,32 @@
             Console.WriteLine($"Erro ao carregar Pokémon: {ex.Message}");
         }
     }
+
+    void PageChanged()
+    {
+        return; //TODO: Corrigir paginacao
+        try
+        {
+            if(string.IsNullOrEmpty(parameters.Name))
+            {
+                var response = 
+                     Http.GetFromJsonAsync<List<Pokemon>>(
+                        $"http://localhost:5098/api/Pokemon/list?take=20&skip={(_selected == 1 ? (1) : (_selected - 1) * 20)}"
+                    )
+                    .GetAwaiter()
+                    .GetResult();
+                pokemons = response;
+            }
+            else
+            {
+
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro ao mudar pagina da lista Pokémon: {ex.Message}");
+        }
+    }
+
+    #endregion
 }

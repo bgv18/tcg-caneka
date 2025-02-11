@@ -1,4 +1,5 @@
-﻿@inherits LayoutComponentBase
+﻿@using tcg_webApp.Components.Pages.Chat
+@inherits LayoutComponentBase
 
 <MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="_theme" />
 <MudPopoverProvider />
@@ -9,16 +10,27 @@
     <MudAppBar Elevation="1" Dense="false">
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@DrawerToggle" />
         <MudSpacer />
-        <MudImage Src="" Alt="Logo" Class="rounded-lg" Width="200" Height="50" />
+        <MudImage Src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiX5RPiVD-l1ul64PD5H5n0UpNJuOL8nF16gP8wFFkchgrqCiLahy5tmWB1mVy6i_Ga7WjpEvTR01-ZF9ad2a-1AnhcbwBG5j8BGK5E7AFVFVWPMBkf5iVSYjRvH4WboLeBxUhpqy-jItA/s776/pokemon-trading-card-game-tcg.png" 
+            Alt="Logo" 
+            Class="rounded-lg" 
+            Width="200" 
+            Height="50" 
+        />
         <MudSpacer />
+        <MudIconButton Icon="@Icons.Material.Outlined.Chat" OnClick="ToggleChat" />
+        <MudIconButton Icon="@Icons.Material.Outlined.ShoppingCart" />
+        <MudIconButton Href="https://www.instagram.com/" Target="_blank" Icon="@Icons.Custom.Brands.Instagram">
+        </MudIconButton>
         <MudToggleIconButton @bind-Toggled="@_isDarkMode"
                              Icon="@Icons.Material.Filled.DarkMode" Color="@Color.Surface" Title="Escuro"
                              ToggledIcon="@Icons.Material.Filled.LightMode" ToggledColor="@Color.Surface" ToggledTitle="Claro" />
 
-        <MudIconButton Icon="@Icons.Custom.Brands.Instagram" Color="Color.Inherit" Link="" Target="_blank" />
     </MudAppBar>
     <MudDrawer @bind-Open="@_drawerOpen">
         <NavMenu/>
+    </MudDrawer>
+    <MudDrawer @bind-Open="_isChatOpen" Anchor="Anchor.Right" Elevation="25" Width="400px">
+        <Chat/>
     </MudDrawer>
     <MudMainContent>
         @Body
@@ -29,9 +41,15 @@
     bool _drawerOpen = true;
     private MudTheme _theme = new();
     private bool _isDarkMode;
+    private bool _isChatOpen = false;
 
     void DrawerToggle()
     {
         _drawerOpen = !_drawerOpen;
+    }
+
+    private void ToggleChat()
+    {
+        _isChatOpen = !_isChatOpen;
     }
 }

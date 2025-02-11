@@ -1,0 +1,55 @@
+﻿<MudPaper Elevation="3" Style="height: 100%; display: flex; flex-direction: column;">
+    
+    <!-- Área do Chat -->
+    <MudPaper Style="flex-grow: 1; overflow-y: auto; padding: 16px;">
+        <MudChat ChatPosition="ChatBubblePosition.Start">
+            <MudAvatar>TCG</MudAvatar>
+            <MudChatBubble>
+                It was said that you would, destroy the Sith, not join them.
+            </MudChatBubble>
+            <MudChatBubble>
+                It was you who would bring balance to the Force
+            </MudChatBubble>
+        </MudChat>
+
+        <MudChat ChatPosition="ChatBubblePosition.End">
+            <MudAvatar>
+                <MudIcon Icon="@Icons.Material.Outlined.Person" />
+            </MudAvatar>
+            <MudChatBubble>
+                Not leave it in Darkness
+            </MudChatBubble>
+        </MudChat>
+    </MudPaper>
+
+    <!-- Área de entrada de texto e botão de envio -->
+    <MudPaper Style="padding: 16px; border-top: 1px solid var(--mud-palette-divider);">
+        <MudGrid>
+            <MudItem xs="10">
+                <MudTextField 
+                    T="string" 
+                    Variant="Variant.Text" 
+                    @bind-Value="newMessage" 
+                    Label="Type a message"
+                    FullWidth="true" 
+                    AutoGrow
+                />
+            </MudItem>
+            <MudItem xs="2">
+                <MudIconButton Icon="@Icons.Material.Outlined.Send" OnClick="SendMessage" />
+            </MudItem>
+        </MudGrid>
+    </MudPaper>
+</MudPaper>
+
+@code {
+    private string newMessage;
+
+    private void SendMessage()
+    {
+        if (!string.IsNullOrWhiteSpace(newMessage))
+        {
+            newMessage = string.Empty;
+        }
+    }
+}
